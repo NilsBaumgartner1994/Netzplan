@@ -1,0 +1,25 @@
+{
+  "name": "netzplan",
+  "version": "1.0.0",
+  "description": "Vorgangsknoten-Netzplan https://de.wikipedia.org/wiki/Netzplantechnik",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NilsBaumgartner1994/Netzplan.git"
+  },
+  "keywords": [
+    "netzplan",
+    "precedence",
+    "diagram",
+    "vorgangsknoten"
+  ],
+  "author": "Nils Baumgartner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NilsBaumgartner1994/Netzplan/issues"
+  },
+  "homepage": "https://github.com/NilsBaumgartner1994/Netzplan#readme"
+}
