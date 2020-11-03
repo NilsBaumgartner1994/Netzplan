@@ -33,6 +33,21 @@ const exampleGraph =  {
     }
 };
 
+function resetCalcedTimesGraph(graphJSON){
+    let copy = JSON.parse(JSON.stringify(graphJSON));
+    let allNodeLabels = Object.keys(copy);
+    for(let i=0; i<allNodeLabels.length; i++){
+        let nodeLabel = allNodeLabels[i];
+        let node = copy[nodeLabel];
+        delete node.earliestStart;
+        delete node.earliestEnd;
+        delete node.latestStart;
+        delete node.latestEnd;
+        copy[nodeLabel] = node;
+    }
+    return copy;
+}
+
 function calcForwardGraph(graphJSON, startNodeLabel){
     let startNode = graphJSON[startNodeLabel];
     startNode.earliestStart = 0;
@@ -163,6 +178,7 @@ function getAllLeafes(graphJSON){
 }
 
 function init(graphJSON, startNodeLabel) {
+    graphJSON = resetCalcedTimesGraph(graphJSON);
     graphJSON = calcForwardGraph(graphJSON, startNodeLabel);
     graphJSON = calcBackwardGraph(graphJSON);
     return graphJSON;
