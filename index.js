@@ -119,20 +119,22 @@ function calcBackwardGraphForEndlabel(graphJSON, endNodeLabel){
 
             let parents = child.parents;
 
-            for(let j=0; j<parents.length; j++){
-                let parentLabel = parents[j];
-                let parent = graphJSON[parentLabel];
+            if(!parents){
+                for(let j=0; j<parents.length; j++){
+                    let parentLabel = parents[j];
+                    let parent = graphJSON[parentLabel];
 
-                let parentsLatestEnd = parent.latestEnd;
-                if(!parentsLatestEnd || parentsLatestEnd > child.latestStart){
-                    parentsLatestEnd = child.latestStart;
-                    liftOfNextImproveableNodes.push(parentLabel);
+                    let parentsLatestEnd = parent.latestEnd;
+                    if(!parentsLatestEnd || parentsLatestEnd > child.latestStart){
+                        parentsLatestEnd = child.latestStart;
+                        liftOfNextImproveableNodes.push(parentLabel);
+                    }
+                    parent.latestEnd = parentsLatestEnd;
+                    parent.latestStart = parentsLatestEnd - parent.duration;
+                    parent.buffer = parent.latestEnd - parent.earliestEnd;
+
+                    graphJSON[parentLabel] = parent;
                 }
-                parent.latestEnd = parentsLatestEnd;
-                parent.latestStart = parentsLatestEnd - parent.duration;
-                parent.buffer = parent.latestEnd - parent.earliestEnd;
-
-                graphJSON[parentLabel] = parent;
             }
         }
         listOfImpoveableNodes = liftOfNextImproveableNodes;
